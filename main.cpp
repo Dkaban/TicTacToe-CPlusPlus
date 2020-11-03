@@ -10,6 +10,7 @@ int main()
 	board.drawBoard();
 	int entryValue = board.askUserInput();
 	cout << "What value did you enter? " << entryValue << endl;
+	board.swapIndexForXO(entryValue);
 
 	return 0;
 }

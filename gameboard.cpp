@@ -6,6 +6,7 @@ using namespace N;
 using namespace std;
 
 string board[10] = { "0","1","2","3","4","5","6","7","8" };
+string lastMove = "O";
 
 void gameboard::drawBoard()
 {
@@ -27,5 +28,12 @@ int gameboard::askUserInput()
 
 void gameboard::swapIndexForXO(int index)
 {
-
+	if (lastMove._Equal("O"))
+	{
+		board[index] = "X";
+	}
+	else
+	{
+		board[index] = "O";
+	}
 }
