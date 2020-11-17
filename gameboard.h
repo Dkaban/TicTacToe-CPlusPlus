@@ -8,9 +8,14 @@ namespace N
     class gameboard
     {
     public:
+        enum State {X, O};
+        State state = X;
         void drawBoard();
         int askUserInput();
         void swapIndexForXO(int);
+        bool checkForGameOver();
+    private:
+        bool checkIndexes(int, int, int);
     };
 }
 

@@ -6,7 +6,6 @@ using namespace N;
 using namespace std;
 
 string board[10] = { "0","1","2","3","4","5","6","7","8" };
-string lastMove = "O";
 
 void gameboard::drawBoard()
 {
@@ -28,12 +27,72 @@ int gameboard::askUserInput()
 
 void gameboard::swapIndexForXO(int index)
 {
-	if (lastMove._Equal("O"))
+	cout << "Index: " << index << endl;
+	cout << "State: " << state << endl;
+	switch (state)
 	{
-		board[index] = "X";
+		case X:
+			board[index] = "X";
+			state = State::O;
+			break;
+
+		case O:
+			board[index] = "O";
+			state = State::X;
+			break;
 	}
-	else
+}
+
+bool gameboard::checkForGameOver()
+{
+	if (checkIndexes(0, 1, 2))
 	{
-		board[index] = "O";
+		return true;
 	}
+	else if (checkIndexes(3, 4, 5))
+	{
+		return true;
+	}
+	else if (checkIndexes(6, 7, 8))
+	{
+		return true;
+	}
+	else if (checkIndexes(0, 3, 6))
+	{
+		return true;
+	}
+	else if (checkIndexes(1, 4, 7))
+	{
+		return true;
+	}
+	else if (checkIndexes(2, 5, 8))
+	{
+		return true;
+	}
+	else if (checkIndexes(0, 4, 8))
+	{
+		return true;
+	}
+	else if (checkIndexes(6, 4, 2))
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool gameboard::checkIndexes(int i, int j, int k)
+{
+	if(board[i] == "X" && board[j] == "X" && board[k] == "X")
+	{
+		//X Wins!!
+		return true;
+	}
+	else if (board[i] == "O" && board[j] == "O" && board[k] == "O")
+	{
+		//O Wins!!
+		return true;
+	}
+
+	return false;
 }
