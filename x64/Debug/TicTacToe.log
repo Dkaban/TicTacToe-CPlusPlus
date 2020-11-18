@@ -1,3 +1,5 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Preview\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(459,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (ConsoleApplication1.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(491,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (ConsoleApplication1.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   main.cpp
-  TicTacToe.vcxproj -> C:\Users\Dusti\Desktop\SDL C++\TicTacToeCPlusPlus\TicTacToeCPlusPlus\x64\Debug\TicTacToe.exe
+  gameboard.cpp
+  Generating Code...
+  TicTacToe.vcxproj -> C:\Users\Dusti\Desktop\Projects\Projects\CPlusTicTacToe\TicTacToe\x64\Debug\TicTacToe.exe

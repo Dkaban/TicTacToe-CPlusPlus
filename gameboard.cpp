@@ -1,11 +1,8 @@
-// my_class.cpp
 #include "gameboard.h" // header in local directory
 #include <iostream>   // header in standard library
 
 using namespace N;
 using namespace std;
-
-string board[10] = { "0","1","2","3","4","5","6","7","8" };
 
 void gameboard::drawBoard()
 {
@@ -15,6 +12,18 @@ void gameboard::drawBoard()
 	cout << " " << board[3] << " | " << board[4] << " | " << board[5] << " " << endl;
 	cout << " " << "--|---|---" << endl;
 	cout << " " << board[6] << " | " << board[7] << " | " << board[8] << " " << endl;
+}
+
+void gameboard::displayResult()
+{
+	if (winner.compare("Tie"))
+	{
+		cout << "The game is a Tie" << endl;
+	}
+	else
+	{
+		cout << "The winner is " << winner << endl;
+	}
 }
 
 int gameboard::askUserInput()
@@ -27,16 +36,14 @@ int gameboard::askUserInput()
 
 void gameboard::swapIndexForXO(int index)
 {
-	cout << "Index: " << index << endl;
-	cout << "State: " << state << endl;
 	switch (state)
 	{
-		case X:
+		case State::X:
 			board[index] = "X";
 			state = State::O;
 			break;
 
-		case O:
+		case State::O:
 			board[index] = "O";
 			state = State::X;
 			break;
@@ -45,6 +52,7 @@ void gameboard::swapIndexForXO(int index)
 
 bool gameboard::checkForGameOver()
 {
+	//Need to check horizontals, verticals and diagonals
 	if (checkIndexes(0, 1, 2))
 	{
 		return true;
@@ -77,6 +85,10 @@ bool gameboard::checkForGameOver()
 	{
 		return true;
 	}
+	else if (checkIfBoardFull())
+	{
+		return true;
+	}
 
 	return false;
 }
@@ -86,13 +98,47 @@ bool gameboard::checkIndexes(int i, int j, int k)
 	if(board[i] == "X" && board[j] == "X" && board[k] == "X")
 	{
 		//X Wins!!
+		winner = "X";
 		return true;
 	}
 	else if (board[i] == "O" && board[j] == "O" && board[k] == "O")
 	{
 		//O Wins!!
+		winner = "O";
 		return true;
 	}
 
 	return false;
+}
+
+bool gameboard::checkIfBoardFull()
+{
+	for (int i = 0; i < 9; i++)
+	{
+		if (board[i] != "X" || board[i] != "O")
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+void gameboard::gameLoop()
+{
+	bool gameOver = false;
+
+	while (!gameOver)
+	{
+		//Ask the user to input a value (index from the tic tac toe board)
+		int entryValue = askUserInput();
+		//Change it to an X or an O depending on which state is active
+		swapIndexForXO(entryValue);
+		//Check to see if the game has ended (straights, diagonals, or board filled up)
+		gameOver = checkForGameOver();
+		//Draw the board for the user
+		drawBoard();
+	}
+
+	//Display the result to the user (X or O or Tie)
+	displayResult();
 }
